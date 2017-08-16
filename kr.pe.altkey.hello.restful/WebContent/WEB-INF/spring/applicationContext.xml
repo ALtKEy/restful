@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+        <context:component-scan base-package="dao"/>
+        <context:component-scan base-package="service"/>
+        <context:component-scan base-package="controller"/>
+
+        <mvc:annotation-driven/>
+        
+        <bean id="contentNegotiationManager"
+			class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+			<property name="favorPathExtension" value="false" />
+			<property name="favorParameter" value="true" />
+			<property name="parameterName" value="mediaType" />
+			<property name="ignoreAcceptHeader" value="true" />
+			<property name="defaultContentType" value="text/html" />
+			<property name="useJaf" value="false" />
+		
+			<property name="mediaTypes">
+				<map>
+					<entry key="" value="text/html" />
+					<entry key="html" value="text/html" />
+					<entry key="json" value="application/json" />
+					<entry key="xml" value="application/xml" />
+				</map>
+			</property>
+		</bean>
+
+		<bean
+			class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+			    <property name="prefix" value="/WEB-INF/web/" />
+			    <property name="suffix" value=".jsp" />
+			</bean>
+</beans>
